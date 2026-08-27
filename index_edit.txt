@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suruchi Sethi, PhD — AI × Life Sciences</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --deep: #0c1e2e;
+            --slate: #334155;
+            --body: #475569;
+            --muted: #94a3b8;
+            --teal: #0d9488;
+            --teal-dark: #0a7a70;
+            --teal-light: #ccfbf1;
+            --teal-subtle: #f0fdfa;
+            --copper: #c2724e;
+            --bg: #fafcfd;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --serif: 'DM Serif Display', Georgia, serif;
+            --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            color: var(--slate);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ---- NAV ---- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(12, 30, 46, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .nav-inner {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+        .nav-name {
+            font-family: var(--serif);
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #fff; }
+
+        /* ---- HERO ---- */
+        .hero {
+            background: linear-gradient(160deg, #0c1e2e 0%, #132f46 50%, #0c1e2e 100%);
+            padding: 140px 32px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -80px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(13,148,136,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            max-width: 1060px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .hero-eyebrow {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(36px, 5vw, 52px);
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 650px;
+        }
+        .hero-sub {
+            font-size: 17px;
+            color: #94a3b8;
+            line-height: 1.65;
+            max-width: 560px;
+            margin-bottom: 32px;
+        }
+        .hero-anchors {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .hero-anchor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+        .hero-anchor .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--teal);
+            flex-shrink: 0;
+        }
+
+        /* ---- SECTIONS ---- */
+        .section {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 80px 32px;
+        }
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(26px, 3.5vw, 34px);
+            color: var(--deep);
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+
+        /* ---- ABOUT ---- */
+        .about-section {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 60px;
+            align-items: start;
+        }
+        .about-text {
+            font-size: 16px;
+            color: var(--body);
+            line-height: 1.75;
+        }
+        .about-text p + p { margin-top: 16px; }
+        .bridge-visual {
+            background: var(--teal-subtle);
+            border: 1px solid #d1fae5;
+            border-radius: 12px;
+            padding: 28px 24px;
+        }
+        .bridge-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--teal-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .bridge-nodes {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+        .bridge-node {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            position: relative;
+        }
+        .bridge-node::before {
+            content: '';
+            position: absolute;
+            left: 29px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #99f6e4;
+        }
+        .bridge-node:first-child::before { top: 50%; }
+        .bridge-node:last-child::before { bottom: 50%; }
+        .bridge-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .bridge-node-text .bn-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--deep);
+        }
+        .bridge-node-text .bn-sub {
+            font-size: 12px;
+            color: var(--body);
+            margin-top: 2px;
+        }
+
+        /* ---- INSIGHTS ---- */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 32px;
+        }
+        .insight-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 28px 24px;
+            transition: all 0.25s;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+        .insight-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 4px 24px rgba(13,148,136,0.08);
+            transform: translateY(-2px);
+        }
+        .insight-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 12px;
+        }
+        .insight-card h3 {
+            font-family: var(--serif);
+            font-size: 19px;
+            color: var(--deep);
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+        .insight-card p {
+            font-size: 14px;
+            color: var(--body);
+            line-height: 1.6;
+            flex: 1;
+        }
+        .insight-footer {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--teal);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ---- PROJECT ---- */
+        .project-section {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .project-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 32px;
+        }
+        .project-preview {
+            background: linear-gradient(135deg, #0c1e2e 0%, #132f46 100%);
+            padding: 40px 32px;
+            position: relative;
+        }
+        .project-preview-inner {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .pipeline-mini {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 16px;
+        }
+        .pipeline-mini-stage {
+            flex: 1;
+            padding: 8px 4px;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.02em;
+        }
+        .deal-preview-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .deal-preview-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: var(--bg);
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .deal-preview-row .dpr-companies {
+            font-weight: 600;
+            color: var(--deep);
+        }
+        .deal-preview-row .dpr-value {
+            font-weight: 700;
+            color: var(--teal-dark);
+            font-size: 12px;
+        }
+        .project-info {
+            padding: 32px;
+        }
+        .project-info h3 {
+            font-family: var(--serif);
+            font-size: 24px;
+            color: var(--deep);
+            margin-bottom: 12px;
+        }
+        .project-info p {
+            font-size: 15px;
+            color: var(--body);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .project-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .project-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--slate);
+        }
+        .project-feature .pf-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--teal-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            font-size: 11px;
+            color: var(--teal-dark);
+        }
+        .project-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding: 12px 24px;
+            background: var(--teal);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .project-cta:hover { background: var(--teal-dark); }
+
+        /* ---- EXPERIENCE ---- */
+        .exp-timeline {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+        .exp-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 32px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: start;
+        }
+        .exp-item:last-child { border-bottom: none; }
+        .exp-period {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 500;
+            padding-top: 3px;
+        }
+        .exp-content h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--deep);
+            margin-bottom: 2px;
+        }
+        .exp-content .exp-role {
+            font-size: 14px;
+            color: var(--teal-dark);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .exp-content p {
+            font-size: 14px;
+            color: var(--body);
+            line-height: 1.6;
+        }
+
+        /* ---- CONTACT ---- */
+        .contact-section {
+            background: var(--deep);
+            padding: 60px 32px;
+            text-align: center;
+        }
+        .contact-section .section-title {
+            color: #fff;
+        }
+        .contact-section p {
+            color: #94a3b8;
+            font-size: 16px;
+            max-width: 480px;
+            margin: 0 auto 28px;
+            line-height: 1.65;
+        }
+        .contact-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .contact-link:hover {
+            border-color: var(--teal);
+            background: rgba(13,148,136,0.1);
+        }
+        .contact-link.primary {
+            background: var(--teal);
+            border-color: var(--teal);
+        }
+        .contact-link.primary:hover {
+            background: var(--teal-dark);
+        }
+
+        /* ---- FOOTER ---- */
+        footer {
+            background: #091520;
+            padding: 20px 32px;
+            text-align: center;
+            font-size: 12px;
+            color: #4a5568;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 800px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+            .project-features {
+                grid-template-columns: 1fr;
+            }
+            .exp-item {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+            .nav-links { gap: 16px; }
+            .nav-links a { font-size: 12px; }
+            .hero { padding: 120px 20px 60px; }
+            .section { padding: 60px 20px; }
+            .project-preview { padding: 24px 16px; }
+            .project-info { padding: 24px; }
+            .pipeline-mini-stage { font-size: 7px; padding: 6px 2px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links a:nth-child(n+4) { display: none; }
+            .hero-anchors { gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-name">Suruchi Sethi</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#insights">Insights</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-eyebrow">Life Sciences Strategy</div>
+        <h1>A scientist's lens on life sciences strategy.</h1>
+        <p class="hero-sub">
+            I'm Suruchi Sethi — a PhD biochemist and competitive intelligence consultant writing about the forces reshaping pharma and biotech, and building tools to make sense of them.
+        </p>
+        <div class="hero-anchors">
+            <div class="hero-anchor"><span class="dot"></span> CI & Strategy, Eradigm Consulting</div>
+            <div class="hero-anchor"><span class="dot"></span> PhD Biochemistry, Max Planck Institute</div>
+            <div class="hero-anchor"><span class="dot"></span> B.Tech & M.Tech, IIT Delhi</div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+    <div class="section" style="padding-top:80px; padding-bottom:80px;">
+        <div class="section-label">About</div>
+        <div class="section-title">Where I sit</div>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    I work at the intersection of science and commercial strategy in life sciences, helping pharma and biotech organisations make smarter decisions on where to compete, who to partner with, and how to position their assets.
+                </p>
+                <p>
+                    My background starts in the lab — five years investigating kinetochore biology for my PhD at the Max Planck Institute, preceded by research on monoclonal antibody purification at IIT Delhi and microscopy image analysis at EMBL Heidelberg.
+                </p>
+                <p>
+                    I moved into consulting to apply scientific thinking to commercial questions. At Eradigm Consulting, I deliver competitive intelligence and strategic advisory across oncology, neurology, immunology, and rare diseases — translating complex market dynamics into actionable intelligence for pharma and biotech clients.
+                </p>
+                <p>
+                    What drives me now are the forces reshaping this industry — whether that's AI restructuring how drugs are discovered and developed, upcoming regulatory milestones that will define therapeutic categories, or the shifting dynamics of how companies compete and partner. I write about these topics publicly, build tools to track the landscape, and try to make complex industry shifts more accessible.
+                </p>
+            </div>
+            <div class="bridge-visual">
+                <div class="bridge-title">Where I focus</div>
+                <div class="bridge-nodes">
+                    <div class="bridge-node">
+                        <div class="bridge-icon" style="background:#ede9fe;">🔬</div>
+                        <div class="bridge-node-text">
+                            <div class="bn-title">Deep Science</div>
+                            <div class="bn-sub">PhD biochemistry, wet lab research, molecular biology</div>
+                        </div>
+                    </div>
+                    <div class="bridge-node">
+                        <div class="bridge-icon" style="background:#fef3c7;">📊</div>
+                        <div class="bridge-node-text">
+                            <div class="bn-title">Commercial Strategy</div>
+                            <div class="bn-sub">Competitive intelligence, market landscaping, BD advisory</div>
+                        </div>
+                    </div>
+                    <div class="bridge-node">
+                        <div class="bridge-icon" style="background:var(--teal-light);">✍️</div>
+                        <div class="bridge-node-text">
+                            <div class="bn-title">Industry Analysis</div>
+                            <div class="bn-sub">AI in drug discovery, regulatory milestones, global pharma trends</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INSIGHTS -->
+<section id="insights">
+    <div class="section">
+        <div class="section-label">Insights</div>
+        <div class="section-title">Writing on life sciences</div>
+        <p style="font-size:16px; color:var(--body); max-width:600px; margin-bottom:8px;">
+            I write about the forces shaping pharma and biotech — AI in drug discovery, regulatory milestones, competitive dynamics, and the strategic questions behind them.
+        </p>
+        <div class="insights-grid">
+
+            <!-- Post 1 -->
+            <a href="https://www.linkedin.com/posts/suruchisethi_mmc-ventures-just-published-one-of-the-most-activity-7472362169142067200-fQ4i?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAeP6bkBwFH-LYwO3D76CGq-F8XcblFbtUg" class="insight-card" target="_blank" rel="noopener">
+                <div class="insight-tag" style="color:#dc2626;">Analysis</div>
+                <h3>AI clears Phase 1 but stumbles at Phase 2 — where the real challenge begins</h3>
+                <p>
+                    AI-discovered drugs hit 80–90% success in Phase 1 trials. But Phase 2 results drop to industry averages. Three reasons why, based on MMC Ventures' research across 40+ senior pharma interviews.
+                </p>
+                <div class="insight-footer">Read on LinkedIn →</div>
+            </a>
+
+            <!-- Post 2 -->
+            <a href="https://www.linkedin.com/posts/suruchisethi_big-pharma-is-spending-billions-on-artificial-activity-7470742904777560065-TLK3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAeP6bkBwFH-LYwO3D76CGq-F8XcblFbtUg" class="insight-card" target="_blank" rel="noopener">
+                <div class="insight-tag" style="color:#7c3aed;">Landscape</div>
+                <h3>Five AI companies that big pharma is actually buying into</h3>
+                <p>
+                    From DeepMind's drug design spinout to a Palantir-founded pharma operating system — five very different bets on where AI creates the most value, all with real commercial traction.
+                </p>
+                <div class="insight-footer">Read on LinkedIn →</div>
+            </a>
+
+            <!-- Post 3 -->
+            <a href="https://www.linkedin.com/posts/suruchisethi_in-the-first-6-months-of-2026-big-pharma-activity-7469655719420784640-z32N?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAeP6bkBwFH-LYwO3D76CGq-F8XcblFbtUg" class="insight-card" target="_blank" rel="noopener">
+                <div class="insight-tag" style="color:#0891b2;">Deal Tracker</div>
+                <h3>H1 2026: The deals that reveal pharma's AI strategy</h3>
+                <p>
+                    AstraZeneca's first AI acquisition. Lilly's $2.75B Insilico deal. BMS deploying Claude across 30,000 employees. A timeline of the biggest AI × pharma deals of the year.
+                </p>
+                <div class="insight-footer">Read on LinkedIn →</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="project-section" id="projects">
+    <div class="section" style="padding-top:80px; padding-bottom:80px;">
+        <div class="section-label">Projects</div>
+        <div class="section-title">Tools I'm building</div>
+        <p style="font-size:16px; color:var(--body); max-width:600px;">
+            Applying AI to real problems in life sciences competitive intelligence — the same problems I encounter in my consulting work.
+        </p>
+
+        <div class="project-card" style="margin-top: 32px;">
+            <div style="padding: 60px 32px; text-align: center;">
+                <div style="font-size: 40px; margin-bottom: 16px; opacity: 0.7;">🔧</div>
+                <h3 style="font-family: var(--serif); font-size: 22px; color: var(--deep); margin-bottom: 8px;">Work in progress</h3>
+                <p style="font-size: 15px; color: var(--body); max-width: 420px; margin: 0 auto; line-height: 1.65;">
+                    Currently building tools for pharma deal tracking, pipeline monitoring, and competitive landscape analysis. Check back soon — or follow along on LinkedIn.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <div class="section">
+        <div class="section-label">Experience</div>
+        <div class="section-title">Career path</div>
+        <div class="exp-timeline">
+            <div class="exp-item">
+                <div class="exp-period">2024 – Present</div>
+                <div class="exp-content">
+                    <h3>Eradigm Consulting</h3>
+                    <div class="exp-role">Senior Associate Consultant</div>
+                    <p>Competitive intelligence and strategy across oncology, neurology, immunology, and rare diseases. Translating complex market dynamics into actionable intelligence for pharma and biotech clients.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-period">2024</div>
+                <div class="exp-content">
+                    <h3>Science Entrepreneur Club</h3>
+                    <div class="exp-role">Science Writer</div>
+                    <p>Published articles, interviews, and press releases on biotech innovations</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-period">2024</div>
+                <div class="exp-content">
+                    <h3>Innovation Forum</h3>
+                    <div class="exp-role">Programme Coordinator</div>
+                    <p>Managed logistics and stakeholder engagement for life sciences and deep tech events. Developed programme content bridging academic researchers with commercial and investor audiences.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-period">2016</div>
+                <div class="exp-content">
+                    <h3>EMBL Heidelberg</h3>
+                    <div class="exp-role">Visiting Scientist</div>
+                    <p><a href="https://www.nature.com/articles/s41594-017-0001-9" target="_blank" rel="noopener" style="color: var(--teal); font-size: 13px; text-decoration: none; font-weight: 500;">Published in Nature Structural & Molecular Biology →</a></p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-period">2015 – 2016</div>
+                <div class="exp-content">
+                    <h3>EY</h3>
+                    <div class="exp-role">Associate Consultant</div>
+                    <p>Management consulting, applying analytical rigour to client problems across industries.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-label" style="margin-top: 48px;">Education</div>
+        <div class="exp-timeline">
+            <div class="exp-item">
+                <div class="exp-period">2018 – 2023</div>
+                <div class="exp-content">
+                    <h3>Max Planck Institute of Molecular Physiology</h3>
+                    <div class="exp-role">PhD, Biochemistry</div>
+                    <p><a href="https://www.nature.com/articles/s41467-025-59970-1" target="_blank" rel="noopener" style="color: var(--teal); font-size: 13px; text-decoration: none; font-weight: 500;">Published in Nature Communications →</a></p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-period">2010 – 2015</div>
+                <div class="exp-content">
+                    <h3>IIT Delhi</h3>
+                    <div class="exp-role">B.Tech & M.Tech, Biochemical Engineering & Biotechnology</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+    <div class="section-title">Let's connect</div>
+    <p>
+        I'm always up for a conversation — whether you work in pharma, biotech, consulting, venture, or you're just curious about how the life sciences industry works. If something on this site sparked a thought, I'd love to hear from you.
+    </p>
+    <div class="contact-links">
+        <a href="https://calendly.com/suruchi-sethi6/30min" class="contact-link primary" target="_blank" rel="noopener">
+            Schedule a call
+        </a>
+        <a href="https://www.linkedin.com/in/suruchisethi" class="contact-link" target="_blank" rel="noopener">
+            LinkedIn
+        </a>
+        <a href="mailto:suruchi.sethi6@gmail.com" class="contact-link">
+            Email
+        </a>
+    </div>
+</section>
+
+<footer>
+    © 2026 Suruchi Sethi. Built with curiosity and Claude.
+</footer>
+
+</body>
+</html>
